@@ -19,7 +19,48 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
 Route::get('/home', 'HomeController@index')->name('home');
-// Route::get('/products','ProductsController@index');
-Route::post('/products/store','ProductsController@store');
-Route::get('/products/productsList','ProductsController@productsList');
+
+
+Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('/products', 'ProductsController@index');
+    Route::get('/products/productsList', 'ProductsController@productsList');
+
+    Route::get('/products/create', 'ProductsController@create'); //show add form
+    Route::post('/products/store', 'ProductsController@store'); // store new
+
+    Route::get('/products/edit', 'ProductsController@edit');
+
+    Route::get('/suppliers', 'SuppliersController@index');
+
+});
+
+
+#####################################
+//Clear route cache:
+Route::get('/route-cache', function () {
+    $exitCode = Artisan::call('route:cache');
+    return 'Routes cache cleared';
+});
+
+//Clear config cache:
+Route::get('/config-cache', function () {
+    $exitCode = Artisan::call('config:cache');
+    return 'Config cache cleared';
+});
+
+// Clear application cache:
+Route::get('/clear-cache', function () {
+    $exitCode = Artisan::call('cache:clear');
+    return 'Application cache cleared';
+});
+
+// Clear view cache:
+Route::get('/view-clear', function () {
+    $exitCode = Artisan::call('view:clear');
+    return 'View cache cleared';
+});
+
+#####################################

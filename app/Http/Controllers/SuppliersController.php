@@ -2,18 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
-use DataTables;
 
-class ProductsController extends Controller
+class SuppliersController extends Controller
 {
-
-    public function __construct()
-    {
-       // $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -21,15 +14,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return view('\pages\products\index');
+        return view('pages.suppliers.index');
     }
-
-
-    public function productsList(DataTables $dataTables){
-        $products = Product::query();
-        return $dataTables::of($products)->toJson();
-    }
-
 
     /**
      * Show the form for creating a new resource.
@@ -38,7 +24,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('\pages\products\form',['action'=>'add']);
+        //
     }
 
     /**
@@ -50,19 +36,15 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         //
-        Product::create([
-            'name'=> $request->name
-        ]);
-        return redirect('products');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Supplier $supplier)
     {
         //
     }
@@ -70,23 +52,22 @@ class ProductsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Supplier $supplier)
     {
-        $product = Product::where("id",$_GET['id'])->first();        
-        return view('\pages\products\form',['action'=>'edit','payload'=>$product->toJson()]);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Supplier $supplier)
     {
         //
     }
@@ -94,10 +75,10 @@ class ProductsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Supplier $supplier)
     {
         //
     }
